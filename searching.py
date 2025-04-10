@@ -25,9 +25,53 @@ def read_data(file_name, field):
         return ret
 
 
+def linear_search(seq,num):
+    """
+
+    :param seq:
+    :param num:
+    :return:
+    """
+
+    keys = ["positions", "count"]
+    pos = []
+
+    for i in range(len(seq)):
+        if seq[i] == num:
+            pos.append(i)
+        else:
+            continue
+
+    if pos == []:
+        return f"Číslo {num} se v zadaném seznamu nenachází"
+    else:
+        vals = [pos, len(pos)]
+        ret = dict(zip(keys,vals))
+        return ret
+
+
+def pattern_search(seq,vz):
+
+    okno = len(vz)
+    poz = set()
+    vz = vz.upper()
+    for i in range(len(seq)-okno):
+        if seq[i:i+okno] == vz:
+            poz.add(i)
+
+    print(f"Nalezené pozice:{poz}")
+    return poz
+
+
 
 def main():
-    read_data("sequential.json", "unordered_numbers")
+    data = read_data("sequential.json",  "dna_sequence")
+
+    lin = linear_search(data, 1)
+    # print(lin)
+    pat = pattern_search(data,"ATA")
+
+
 
 if __name__ == '__main__':
     main()
