@@ -56,11 +56,33 @@ def pattern_search(seq,vz):
     poz = set()
     vz = vz.upper()
     for i in range(len(seq)-okno):
-        if seq[i:i+okno] == vz:
-            poz.add(i)
+        j = 0
+        while j < okno:
+            if seq[i+j] == vz[j]:
+                j += 1
+            else:
+                break
+            if j == okno:
+                poz.add(i)
 
     print(f"Nalezené pozice:{poz}")
     return poz
+
+
+def  binary_search(numseq,num):
+    lft = 0
+    rght = len(numseq) - 1
+
+    while lft <= rght:
+        mid = (lft + rght) // 2
+        if numseq[mid] == num:
+            print(f"pozice je: {mid}")
+            return mid
+        elif numseq[mid] > num:
+            rght = mid - 1
+        else:
+            lft = mid + 1
+
 
 
 
@@ -70,6 +92,10 @@ def main():
     lin = linear_search(data, 1)
     # print(lin)
     pat = pattern_search(data,"ATA")
+
+    ordered = read_data("sequential.json",  "ordered_numbers")
+    print(binary_search(ordered,-1))
+
 
 
 
